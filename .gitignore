@@ -1,0 +1,8 @@
+/target/
+.idea*
+auxprotect.iml
+AuxProtect.iml
+.classpath
+.project
+*.bat
+Spigot/dependency-reduced-pom.xml
