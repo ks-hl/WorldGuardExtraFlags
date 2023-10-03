@@ -12,6 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
@@ -228,6 +229,21 @@ public class PlayerListener implements Listener
 		//so we need to make sure to force the flight status.
 		Boolean value = this.sessionManager.get(this.worldGuardPlugin.wrapPlayer(player)).getHandler(FlyFlagHandler.class).getCurrentValue();
 		if (value != null)
+		{
+			player.setAllowFlight(value);
+		}
+	}
+
+	@EventHandler(priority = EventPriority.HIGHEST)
+	public void onProjectileLaunchEvent(ProjectileLaunchEvent event)
+	{
+		if (!(event.getEntity() instanceof Player player)) return;
+		LocalPlayer localPlayer = this.worldGuardPlugin.wrapPlayer(player);
+
+		//Some plugins toggle flight off on world change based on permissions,
+		//so we need to make sure to force the flight status.
+		Boolean value = this.sessionManager.get(this.worldGuardPlugin.wrapPlayer(player)).getHandler(FlyFlagHandler.class).getCurrentValue();
+		if (this.regionContainer.createQuery().queryState(localPlayer.getLocation(), localPlayer, Flags.LAUNCH_PROJECTILE) == State.DENY)
 		{
 			player.setAllowFlight(value);
 		}
