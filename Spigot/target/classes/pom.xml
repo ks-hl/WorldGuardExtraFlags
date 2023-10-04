@@ -13,16 +13,6 @@
 
 	<build>
 		<finalName>WorldGuardExtraFlags</finalName>
-		<resources>
-			<resource>
-				<directory>${basedir}/src/main/resources</directory>
-				<filtering>true</filtering>
-				<includes>
-					<include>plugin.yml</include>
-					<include>config.yml</include>
-				</includes>
-			</resource>
-		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -81,7 +71,7 @@
 		<dependency>
 			<groupId>net.goldtreeservers.worldguardextraflags</groupId>
 			<artifactId>wg</artifactId>
-			<version>${project.version}</version>
+			<version>4.2.2-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 

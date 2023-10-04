@@ -237,15 +237,12 @@ public class PlayerListener implements Listener
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onProjectileLaunchEvent(ProjectileLaunchEvent event)
 	{
-		if (!(event.getEntity() instanceof Player player)) return;
+		if (!(event.getEntity().getShooter() instanceof Player player)) return;
 		LocalPlayer localPlayer = this.worldGuardPlugin.wrapPlayer(player);
 
-		//Some plugins toggle flight off on world change based on permissions,
-		//so we need to make sure to force the flight status.
-		Boolean value = this.sessionManager.get(this.worldGuardPlugin.wrapPlayer(player)).getHandler(FlyFlagHandler.class).getCurrentValue();
 		if (this.regionContainer.createQuery().queryState(localPlayer.getLocation(), localPlayer, Flags.LAUNCH_PROJECTILE) == State.DENY)
 		{
-			player.setAllowFlight(value);
+			event.setCancelled(true);
 		}
 	}
 }

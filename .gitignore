@@ -6,3 +6,8 @@ AuxProtect.iml
 .project
 *.bat
 Spigot/dependency-reduced-pom.xml
+*.class
+*.jar
+*.lst
+Spigot/target/classes/dependency-reduced-pom.xml
+*.properties
